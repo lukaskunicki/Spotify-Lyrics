@@ -9,7 +9,7 @@ const Login = (props) => {
     response_type: "code",
     redirect_uri: "http://localhost:3000",
     scope:
-      "streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-stat",
+      "streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state",
   };
   const AUTH_URL = BASE_URL + useGetParameters(params);
 
@@ -21,8 +21,8 @@ const Login = (props) => {
   `;
 
   const LoginLink = styled.a`
-    padding: 25px 15px;
-    font-size: 24px;
+    padding: 1em 1.5em;
+    font-size: 2em;
     background: #1db954;
     color: #fff;
     border-radius: 10px;
