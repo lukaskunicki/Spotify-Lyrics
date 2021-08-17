@@ -20,12 +20,13 @@ const SearchBar = ({ searchValue, searchValueHandler }) => {
     }
   `;
   return (
-    <StyledSearchBar>
+    <StyledSearchBar key="searchBar">
       <input
         type="search"
         placeholder="Search for Songs and Artists"
         value={searchValue}
         onChange={(e) => searchValueHandler(e)}
+        autoFocus="autoFocus"
       />
     </StyledSearchBar>
   );
