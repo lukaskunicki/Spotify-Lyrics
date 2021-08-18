@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../helpers/useAuth";
 import SearchBar from "./partials/SearchBar";
 import SpotifyWebApi from "spotify-web-api-node";
+import TrackList from "./partials/TrackList";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
@@ -23,7 +24,7 @@ const Dashboard = ({ code }) => {
 
     let cancelRequest = false;
     spotifyApi.searchTracks(searchValue).then((response) => {
-      if(cancelRequest) return;
+      if (cancelRequest) return;
       const items = response.body.tracks.items;
       const newSearchResults = items.map((singleTrack) => {
         const thumbnails = singleTrack.album.images.sort(
@@ -37,9 +38,9 @@ const Dashboard = ({ code }) => {
           thumbnail: thumbnails[0],
         };
       });
-      console.log(newSearchResults);
       setSearchResults(newSearchResults);
-    }, () => cancelRequest = true);
+    });
+    return () => (cancelRequest = true);
   }, [searchValue, accessToken]);
 
   const handleSearchValue = (e) => {
@@ -47,10 +48,15 @@ const Dashboard = ({ code }) => {
   };
 
   return (
-    <SearchBar
-      searchValue={searchValue}
-      searchValueHandler={handleSearchValue}
-    />
+    <>
+      <SearchBar
+        searchValue={searchValue}
+        searchValueHandler={handleSearchValue}
+      />
+      {searchResults.length ? (
+        <TrackList searchResults={searchResults} />
+      ) : null}
+    </>
   );
 };
 export default Dashboard;
