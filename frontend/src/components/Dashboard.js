@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../helpers/useAuth";
 import SearchBar from "./partials/SearchBar";
-import SpotifyWebApi from "spotify-web-api-node";
 import TrackList from "./partials/TrackList";
+import Player from "./partials/Player";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
@@ -12,6 +13,7 @@ const Dashboard = ({ code }) => {
   const accessToken = useAuth(code);
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [playingTrack, setPlayingTrack] = useState(null);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -43,9 +45,11 @@ const Dashboard = ({ code }) => {
     return () => (cancelRequest = true);
   }, [searchValue, accessToken]);
 
-  const handleSearchValue = (e) => {
-    setSearchValue(e.target.value);
-  };
+  const handleTrack = (track) => {
+    setPlayingTrack(track);
+  }
+
+  const handleSearchValue = (e) => setSearchValue(e.target.value);
 
   return (
     <>
@@ -54,8 +58,9 @@ const Dashboard = ({ code }) => {
         searchValueHandler={handleSearchValue}
       />
       {searchResults.length ? (
-        <TrackList searchResults={searchResults} />
+        <TrackList searchResults={searchResults} trackHandler={handleTrack} />
       ) : null}
+      <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
     </>
   );
 };
