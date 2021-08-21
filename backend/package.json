@@ -17,6 +17,6 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
-   "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12"
   }
 }
