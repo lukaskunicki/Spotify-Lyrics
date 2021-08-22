@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import styled from "styled-components";
-import getSongLyrics from "../../helpers/useLyrics";
 
 const PlayerContainer = styled.div`
   position: fixed;
@@ -9,20 +8,15 @@ const PlayerContainer = styled.div`
   width: 100%;
   padding: 0 5px;
 `;
-const Player = ({ accessToken, trackUri }) => {
+const Player = ({ accessToken, trackToPlay }) => {
   const [play, setPlay] = useState(false);
-
-  const handleSongLyrics = async () => {
-    const res = await getSongLyrics({title: 'Fiji', artist: 'Taco Hemingway'});
-    console.log(res);
-  };
 
   useEffect(() => {
     setPlay(true);
-    handleSongLyrics();
-  }, [trackUri]);
+  }, [trackToPlay]);
+
   return accessToken ? (
-    <PlayerContainer>
+    <PlayerContainer key={trackToPlay}>
       <SpotifyPlayer
         token={accessToken}
         showSaveIcon
@@ -30,7 +24,7 @@ const Player = ({ accessToken, trackUri }) => {
         callback={(state) => {
           if (!state.isPlaying) setPlay(false);
         }}
-        uris={trackUri ? [trackUri] : []}
+        uris={trackToPlay?.uri ? [trackToPlay.uri] : []}
       />
     </PlayerContainer>
   ) : null;

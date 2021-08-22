@@ -4,6 +4,7 @@ import SearchBar from "./partials/SearchBar";
 import TrackList from "./partials/TrackList";
 import Player from "./partials/Player";
 import SpotifyWebApi from "spotify-web-api-node";
+import getSongLyrics from "../helpers/useLyrics";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
@@ -14,6 +15,7 @@ const Dashboard = ({ code }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState(null);
+  const [songLyrics, setSongLyrics] = useState(null);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -45,9 +47,15 @@ const Dashboard = ({ code }) => {
     return () => (cancelRequest = true);
   }, [searchValue, accessToken]);
 
-  const handleTrack = (track) => {
+  const handleTrack = async (track) => {
     setPlayingTrack(track);
-  }
+    const lyrics = await getSongLyrics({
+      title: track.title,
+      artist: track.artist,
+    });
+    setSearchResults("");
+    setSongLyrics(lyrics);
+  };
 
   const handleSearchValue = (e) => setSearchValue(e.target.value);
 
@@ -60,7 +68,13 @@ const Dashboard = ({ code }) => {
       {searchResults.length ? (
         <TrackList searchResults={searchResults} trackHandler={handleTrack} />
       ) : null}
-      <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+      <Player
+        accessToken={accessToken}
+        track={playingTrack?.uri}
+      />
+      <pre>
+        {songLyrics ? songLyrics : ''}
+      </pre>
     </>
   );
 };
