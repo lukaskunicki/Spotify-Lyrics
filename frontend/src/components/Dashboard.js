@@ -6,6 +6,7 @@ import Player from "./partials/Player";
 import Lyrics from "./partials/Lyrics";
 import SpotifyWebApi from "spotify-web-api-node";
 import getSongLyrics from "../helpers/useLyrics";
+import Loader from "react-loader-spinner";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
@@ -17,6 +18,7 @@ const Dashboard = ({ code }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState(null);
   const [songLyrics, setSongLyrics] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -32,6 +34,7 @@ const Dashboard = ({ code }) => {
       if (cancelRequest) return;
       const items = response.body.tracks.items;
       const newSearchResults = items.map((singleTrack) => {
+        console.log(singleTrack.album.images)
         const thumbnails = singleTrack.album.images.sort(
           (a, b) => a.height < b.height
         );
@@ -40,7 +43,8 @@ const Dashboard = ({ code }) => {
           artist: singleTrack.artists[0].name,
           title: singleTrack.name,
           uri: singleTrack.uri,
-          thumbnail: thumbnails[0],
+          backgroundImage: thumbnails[0],
+          thumbnail: thumbnails[thumbnails.length - 1]
         };
       });
       setSearchResults(newSearchResults);
@@ -50,12 +54,15 @@ const Dashboard = ({ code }) => {
 
   const handleTrack = async (track) => {
     setPlayingTrack(track);
+    console.log(track)
+    setSearchResults("");
+    setIsLoading(true);
     const lyrics = await getSongLyrics({
       title: track.title,
       artist: track.artist,
     });
-    setSearchResults("");
     setSongLyrics(lyrics);
+    setIsLoading(false);
   };
 
   const handleSearchValue = (e) => setSearchValue(e.target.value);
@@ -70,7 +77,11 @@ const Dashboard = ({ code }) => {
         <TrackList searchResults={searchResults} trackHandler={handleTrack} />
       ) : null}
       <Player accessToken={accessToken} trackToPlay={playingTrack?.uri} />
-      {songLyrics ? <Lyrics text={songLyrics} /> : null}
+      {songLyrics ? (
+        <Lyrics text={songLyrics} backgroundImage={playingTrack?.backgroundImage} />
+      ) : isLoading ? (
+        <Loader type="ThreeDots" color="#1DB954" height={'100vh'} />
+      ) : null}
     </>
   );
 };

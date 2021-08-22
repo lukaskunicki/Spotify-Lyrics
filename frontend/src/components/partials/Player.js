@@ -7,6 +7,7 @@ const PlayerContainer = styled.div`
   bottom: 0;
   width: 100%;
   padding: 0 5px;
+  z-index: 9;
 `;
 const Player = ({ accessToken, trackToPlay }) => {
   const [play, setPlay] = useState(false);
@@ -16,7 +17,9 @@ const Player = ({ accessToken, trackToPlay }) => {
   }, [trackToPlay]);
 
   return accessToken ? (
-    <PlayerContainer key={trackToPlay}>
+    <PlayerContainer key={trackToPlay} style={{
+      pointerEvents: trackToPlay ? 'all' : 'none'
+    }}>
       <SpotifyPlayer
         token={accessToken}
         showSaveIcon

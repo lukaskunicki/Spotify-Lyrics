@@ -7,6 +7,7 @@ const StyledSearchBar = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 1em;
 
   & > input {
     max-width: 500px;
