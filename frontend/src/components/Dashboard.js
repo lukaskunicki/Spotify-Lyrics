@@ -3,6 +3,7 @@ import useAuth from "../helpers/useAuth";
 import SearchBar from "./partials/SearchBar";
 import TrackList from "./partials/TrackList";
 import Player from "./partials/Player";
+import Lyrics from "./partials/Lyrics";
 import SpotifyWebApi from "spotify-web-api-node";
 import getSongLyrics from "../helpers/useLyrics";
 
@@ -68,13 +69,8 @@ const Dashboard = ({ code }) => {
       {searchResults.length ? (
         <TrackList searchResults={searchResults} trackHandler={handleTrack} />
       ) : null}
-      <Player
-        accessToken={accessToken}
-        track={playingTrack?.uri}
-      />
-      <pre>
-        {songLyrics ? songLyrics : ''}
-      </pre>
+      <Player accessToken={accessToken} trackToPlay={playingTrack?.uri} />
+      {songLyrics ? <Lyrics text={songLyrics} /> : null}
     </>
   );
 };

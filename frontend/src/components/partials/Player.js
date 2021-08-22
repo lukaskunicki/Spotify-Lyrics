@@ -24,7 +24,7 @@ const Player = ({ accessToken, trackToPlay }) => {
         callback={(state) => {
           if (!state.isPlaying) setPlay(false);
         }}
-        uris={trackToPlay?.uri ? [trackToPlay.uri] : []}
+        uris={trackToPlay ? [trackToPlay] : []}
       />
     </PlayerContainer>
   ) : null;
