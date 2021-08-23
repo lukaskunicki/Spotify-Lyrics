@@ -17,14 +17,14 @@ const LyricsContainer = styled.div`
     text-align: center;
     line-height: 1.8;
     overflow-y: scroll;
-    height: calc(100vh - 220px);
+    height: calc(100vh - 250px);
     text-shadow: 1px 1px 1px white;
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 10px;
     }
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #f1f1f122;
     }
     &::-webkit-scrollbar-thumb {
       background: #888;
