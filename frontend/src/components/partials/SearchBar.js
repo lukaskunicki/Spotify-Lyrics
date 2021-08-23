@@ -10,6 +10,7 @@ const StyledSearchBar = styled.form`
   padding: 0 1em;
 
   & > input {
+    font-family: "Noto Sans", sans-serif;
     max-width: 500px;
     width: 100%;
     height: 52px;

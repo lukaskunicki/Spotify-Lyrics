@@ -7,18 +7,20 @@ import Lyrics from "./partials/Lyrics";
 import SpotifyWebApi from "spotify-web-api-node";
 import getSongLyrics from "../helpers/useLyrics";
 import Loader from "react-loader-spinner";
+import Login from "../components/Login";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
 });
+const codeParam = new URLSearchParams(window.location.search).get("code");
 
-const Dashboard = ({ code }) => {
-  const accessToken = useAuth(code);
+const Dashboard = () => {
+  const accessToken = useAuth(codeParam);
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState(null);
   const [songLyrics, setSongLyrics] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -34,7 +36,6 @@ const Dashboard = ({ code }) => {
       if (cancelRequest) return;
       const items = response.body.tracks.items;
       const newSearchResults = items.map((singleTrack) => {
-        console.log(singleTrack.album.images)
         const thumbnails = singleTrack.album.images.sort(
           (a, b) => a.height < b.height
         );
@@ -44,7 +45,7 @@ const Dashboard = ({ code }) => {
           title: singleTrack.name,
           uri: singleTrack.uri,
           backgroundImage: thumbnails[0],
-          thumbnail: thumbnails[thumbnails.length - 1]
+          thumbnail: thumbnails[thumbnails.length - 1],
         };
       });
       setSearchResults(newSearchResults);
@@ -54,7 +55,8 @@ const Dashboard = ({ code }) => {
 
   const handleTrack = async (track) => {
     setPlayingTrack(track);
-    console.log(track)
+    setSongLyrics("");
+    setSearchValue("");
     setSearchResults("");
     setIsLoading(true);
     const lyrics = await getSongLyrics({
@@ -67,6 +69,7 @@ const Dashboard = ({ code }) => {
 
   const handleSearchValue = (e) => setSearchValue(e.target.value);
 
+  if (!codeParam && !accessToken) return <Login />;
   return (
     <>
       <SearchBar
@@ -78,9 +81,17 @@ const Dashboard = ({ code }) => {
       ) : null}
       <Player accessToken={accessToken} trackToPlay={playingTrack?.uri} />
       {songLyrics ? (
-        <Lyrics text={songLyrics} backgroundImage={playingTrack?.backgroundImage} />
+        <Lyrics
+          text={songLyrics}
+          backgroundImage={playingTrack?.backgroundImage}
+        />
       ) : isLoading ? (
-        <Loader type="ThreeDots" color="#1DB954" height={'100vh'} />
+        <Loader
+          type="ThreeDots"
+          color="#1DB954"
+          height={"100vh"}
+          style={{ textAlign: "center" }}
+        />
       ) : null}
     </>
   );

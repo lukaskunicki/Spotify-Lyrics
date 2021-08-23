@@ -6,7 +6,6 @@ const PlayerContainer = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 0 5px;
   z-index: 9;
 `;
 const Player = ({ accessToken, trackToPlay }) => {
@@ -18,7 +17,8 @@ const Player = ({ accessToken, trackToPlay }) => {
 
   return accessToken ? (
     <PlayerContainer key={trackToPlay} style={{
-      pointerEvents: trackToPlay ? 'all' : 'none'
+      pointerEvents: trackToPlay ? 'all' : 'none',
+      fontFamily: "Noto Sans"
     }}>
       <SpotifyPlayer
         token={accessToken}

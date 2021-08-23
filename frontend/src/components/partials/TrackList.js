@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 const TracksList = styled.div`
+  background: #fff;
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
   overflow-y: scroll;
   height: 400px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: "Noto Sans", sans-serif;
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -33,8 +38,11 @@ const SingleTrackContainer = styled.div`
 `;
 const AuthorImageContainer = styled.div`
   width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   & > img {
-    width: 100%;
+    width: 80px;
   }
 `;
 const AuthorDataContainer = styled.div`
@@ -42,9 +50,11 @@ const AuthorDataContainer = styled.div`
   padding: 0 25px;
   & > .song-title {
     text-align: left;
+    font-size: 16px;
   }
   & > .song-author {
     text-align: left;
+    font-family: 14px;
   }
 `;
 
