@@ -5,6 +5,7 @@ const LyricsContainer = styled.div`
   height: calc(100vh - 130px);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 
   & > pre {
     padding: 3em 2em 0;
@@ -38,7 +39,7 @@ const Lyrics = ({ text, backgroundImage }) => {
   return (
     <LyricsContainer
       style={{
-        background: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),url(${backgroundImage.url})`,
+        background: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),url(${backgroundImage.url}) center`,
       }}
     >
       <pre>{text}</pre>

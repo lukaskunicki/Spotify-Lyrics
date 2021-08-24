@@ -6,7 +6,7 @@ const useAuth = (code) => {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
-    if(!code) return null;
+    if (!code) return null;
     axios
       .post("http://localhost:3001/login", {
         code,

@@ -2,15 +2,16 @@ import React from "react";
 import useGetParameters from "../helpers/useGetParameters";
 import styled from "styled-components";
 
-const FullHeightContainer = styled.div`
+const Container = styled.div`
+  padding: 4em 0;
+`;
+const LoginLinkContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 `;
 
 const LoginLink = styled.a`
-  padding: 1em 1.5em;
+  padding: 0.8em 1.3em;
   font-size: 2em;
   background: #1db954;
   color: #fff;
@@ -19,6 +20,8 @@ const LoginLink = styled.a`
   transition: all 200ms ease;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  margin: 1em auto;
 
   :hover {
     background: #fff;
@@ -27,6 +30,12 @@ const LoginLink = styled.a`
   }
 `;
 
+const MainHeadline = styled.h1`
+  font-family: "Noto Sans", sans-serif;
+  width: 100%;
+  text-align: center;
+  font-size: 5em;
+`;
 
 const Login = (props) => {
   const BASE_URL = "https://accounts.spotify.com/authorize";
@@ -40,9 +49,12 @@ const Login = (props) => {
   const AUTH_URL = BASE_URL + useGetParameters(params);
 
   return (
-    <FullHeightContainer>
+    <Container>
+      <MainHeadline>Spotify Lyrics</MainHeadline>
+      <LoginLinkContainer>
       <LoginLink href={AUTH_URL}>Login to Spotify</LoginLink>
-    </FullHeightContainer>
+      </LoginLinkContainer>
+    </Container>
   );
 };
 

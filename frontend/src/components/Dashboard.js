@@ -12,9 +12,9 @@ import Login from "../components/Login";
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
 });
-const codeParam = new URLSearchParams(window.location.search).get("code");
 
 const Dashboard = () => {
+  const codeParam = new URLSearchParams(window.location.search).get("code");
   const accessToken = useAuth(codeParam);
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
