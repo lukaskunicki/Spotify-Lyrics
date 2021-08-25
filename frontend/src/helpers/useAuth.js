@@ -1,9 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 const useAuth = (code) => {
-  const [accessToken, setAccessToken] = useState();
-  const [refreshToken, setRefreshToken] = useState();
-  const [expiresIn, setExpiresIn] = useState();
+  const authCookie = cookies.get("s_l_auth");
+  const [accessToken, setAccessToken] = useState(authCookie?.accessToken);
+  const [refreshToken, setRefreshToken] = useState(authCookie?.refreshToken);
+  const [expiresIn, setExpiresIn] = useState(authCookie?.expiresIn);
+
+  useEffect(() => {
+    cookies.set(
+      "s_l_auth",
+      JSON.stringify({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        expiresIn: expiresIn,
+      }),
+      { path: "/" }
+    );
+  }, [accessToken, expiresIn, refreshToken]);
 
   useEffect(() => {
     if (!code) return null;

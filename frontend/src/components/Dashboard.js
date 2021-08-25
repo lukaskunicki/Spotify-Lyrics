@@ -8,6 +8,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import getSongLyrics from "../helpers/useLyrics";
 import Loader from "react-loader-spinner";
 import Login from "../components/Login";
+import LyricsPlaceholder from "./partials/LyricsPlaceholder";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "e2f5bc73916845cca657f51299b431a6",
@@ -89,10 +90,12 @@ const Dashboard = () => {
         <Loader
           type="ThreeDots"
           color="#1DB954"
-          height={"100vh"}
+          height={"82vh"}
           style={{ textAlign: "center" }}
         />
-      ) : null}
+      ) : (
+        <LyricsPlaceholder />
+      )}
     </>
   );
 };

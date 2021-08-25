@@ -3,7 +3,10 @@ import useGetParameters from "../helpers/useGetParameters";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 4em 0;
+  padding: 4em 2em;
+  @media (max-width: 768px) {
+    padding: 1em;
+  }
 `;
 const LoginLinkContainer = styled.div`
   display: flex;
@@ -35,6 +38,16 @@ const MainHeadline = styled.h1`
   width: 100%;
   text-align: center;
   font-size: 5em;
+  @media (max-width: 768px) {
+    font-size: 4em;
+  }
+`;
+
+const MainDescription = styled.p`
+  font-family: "Noto Sans", sans-serif;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
 `;
 
 const CopyRights = styled.div`
@@ -46,6 +59,7 @@ const CopyRights = styled.div`
   font-family: "consolas";
   font-family: 14px;
   padding: 10px 0;
+  left: 0;
 
   & > svg {
     width: 20px;
@@ -66,6 +80,9 @@ const Login = (props) => {
   return (
     <Container>
       <MainHeadline>Spotify Lyrics</MainHeadline>
+      <MainDescription>
+        Listen to your favourite songs and follow the lyrics
+      </MainDescription>
       <LoginLinkContainer>
         <LoginLink href={AUTH_URL}>Login to Spotify</LoginLink>
       </LoginLinkContainer>
