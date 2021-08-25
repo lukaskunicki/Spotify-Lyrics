@@ -1,6 +1,7 @@
 import React from "react";
 import useGetParameters from "../helpers/useGetParameters";
 import styled from "styled-components";
+import config from "../conf/config";
 
 const Container = styled.div`
   padding: 4em 2em;
@@ -69,9 +70,9 @@ const CopyRights = styled.div`
 const Login = (props) => {
   const BASE_URL = "https://accounts.spotify.com/authorize";
   const params = {
-    client_id: "e2f5bc73916845cca657f51299b431a6",
+    client_id: config.CLIENT_ID,
     response_type: "code",
-    redirect_uri: "http://localhost:3000",
+    redirect_uri: config.REDIRECT_URI,
     scope:
       "streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state",
   };
