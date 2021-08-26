@@ -105,6 +105,3 @@ dist
 
 # environment
 *.env
-
-# build
-build/*
