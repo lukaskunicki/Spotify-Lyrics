@@ -1,13 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 const app = express();
 const port = 3001;
 
-app.use(cors());
-app.use(bodyParser.json());
+const path = require("path");
 
 app.post("/login", (req, res) => {
   const code = req.body.code;
@@ -53,5 +50,12 @@ app.post("/refresh", (req, res) => {
       res.sendStatus(400);
     });
 });
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 app.listen(port);
