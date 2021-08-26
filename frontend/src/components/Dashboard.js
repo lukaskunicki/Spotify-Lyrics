@@ -9,9 +9,10 @@ import getSongLyrics from "../helpers/useLyrics";
 import Loader from "react-loader-spinner";
 import Login from "../components/Login";
 import LyricsPlaceholder from "./partials/LyricsPlaceholder";
+import config from "../conf/config";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "e2f5bc73916845cca657f51299b431a6",
+  clientId: config.CLIENT_ID,
 });
 
 const Dashboard = () => {

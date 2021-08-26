@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import config from "../conf/config";
 
 const cookies = new Cookies();
 
@@ -25,7 +26,7 @@ const useAuth = (code) => {
   useEffect(() => {
     if (!code) return null;
     axios
-      .post("http://localhost:3001/login", {
+      .post(config.API_URL + "/login", {
         code,
       })
       .then((res) => {
@@ -44,7 +45,7 @@ const useAuth = (code) => {
 
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/refresh", {
+        .post(config.API_URL + "/refresh", {
           refreshToken,
         })
         .then((res) => {
