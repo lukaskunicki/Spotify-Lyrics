@@ -35,8 +35,9 @@ const useAuth = (code) => {
         setExpiresIn(res.data.expiresIn);
         window.history.pushState({}, null, "/");
       })
-      .catch(() => {
-        window.location.href = "/";
+      .catch((err) => {
+        console.log(err);
+        // window.location.href = "/";
       });
   }, [code]);
 
