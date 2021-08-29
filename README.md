@@ -1,6 +1,7 @@
 # Spotify Lyrics :musical_note:
 
 Spotify Lyrics app has been created using **Node JS** on for the Server side and **React JS** on the frontend.
+The UI has been prepared with Styled Components.
 
 #### <u>Live demo</u>:fire:
 
