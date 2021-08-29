@@ -1,13 +1,9 @@
-import { getLyrics } from "genius-lyrics-api";
+import axios from "axios";
+import config from "../conf/config";
 
 const getSongLyrics = async (song) => {
-  const queryOptions = {
-    apiKey: "STDVqCKQcRjydo2OMsA-YTW-H_kPOoSbJph1EHviftI_NWeDhjsJUtqGru7CJsm4",
-    title: song.title,
-    artist: song.artist,
-    optimizeQuery: true,
-  };
-  return await getLyrics(queryOptions);
+  const res = await axios.post(config.API_URL + "/lyrics", { song: song });
+  return await res.data.text;
 };
 
 export default getSongLyrics;

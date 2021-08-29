@@ -1,4 +1,5 @@
-// require("dotenv").config();
+require("dotenv").config();
+const geniusApi = require("genius-lyrics-api");
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
 const app = express();
@@ -24,7 +25,7 @@ app.post("/login", (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.sendStatus(400);
     });
 });
@@ -50,6 +51,22 @@ app.post("/refresh", (req, res) => {
       console.log(err);
       res.sendStatus(400);
     });
+});
+
+app.post("/lyrics", (req, res) => {
+  const song = req.body.song;
+  const queryOptions = {
+    apiKey: "STDVqCKQcRjydo2OMsA-YTW-H_kPOoSbJph1EHviftI_NWeDhjsJUtqGru7CJsm4",
+    title: song.title,
+    artist: song.artist,
+    optimizeQuery: true,
+  };
+  geniusApi
+    .getLyrics(queryOptions)
+    .then((data) => {
+      res.json({ text: data });
+    })
+    .catch((err) => console.log(err));
 });
 
 app.use(express.static(path.join(__dirname, "build")));
