@@ -1,30 +1,33 @@
-# Spotify Lyrics
+# Spotify Lyrics :musical_note:
 
 Spotify Lyrics app has been created using **Node JS** on for the Server side and **React JS** on the frontend.
 
-#### <u>Live demo</u>
+#### <u>Live demo</u>:fire:
 
 https://spotify-lyrics-web-app.herokuapp.com/
 
 ![](./docs/Screenshot_1.jpg)
 
+
 Please log in with your Spotify account.<br>
-**Remember that the Web Player API works for premium accounts only.**
+:warning:	**Remember that the Web Player API works for premium accounts only.**
 
 ![](./docs/Screenshot_2.jpg)
 
-Search for your favourite songs.
+
+:male_detective:Search for your favourite songs.
 
 ![](./docs/Screenshot_3.jpg)
 
-The lyrics will be pulled automatically and appear in a scrollable box.
+
+:fountain_pen:The lyrics will be pulled automatically and appear in a scrollable box.
 
 ![](./docs/Screenshot_4.jpg)
 
-The app has been prepared with a view to mobile devices as well.
 
+:iphone:The app has been prepared with a view to mobile devices as well.<br><br><br>
 
-#### <u>Local development</u>
+#### <u>Local development</u>:hammer_and_wrench::gear:
 
 1. Setup your developer accounts for `Spotify` and `Genius`
 2. Prepare your .env file with the following values
