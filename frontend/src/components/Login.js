@@ -26,7 +26,7 @@ const LoginLink = styled.a`
   text-decoration: none;
   display: inline-block;
   margin: 1em auto;
-
+  font-family: "Noto Sans", sans-serif;
   :hover {
     background: #fff;
     color: #1db954;

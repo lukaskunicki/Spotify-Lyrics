@@ -39,7 +39,7 @@ const Lyrics = ({ text, backgroundImage }) => {
   return (
     <LyricsContainer
       style={{
-        background: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),url(${backgroundImage.url}) center`,
+        background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(${backgroundImage.url}) center`,
       }}
     >
       <pre>{text}</pre>
