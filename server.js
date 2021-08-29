@@ -2,8 +2,9 @@
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
 const app = express();
-
+const bodyParser = require("body-parser");
 const path = require("path");
+app.use(bodyParser.json());
 
 app.post("/login", (req, res) => {
   const code = req.body.code;
@@ -22,7 +23,8 @@ app.post("/login", (req, res) => {
         expiresIn: data.body.expires_in,
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       res.sendStatus(400);
     });
 });
@@ -50,11 +52,10 @@ app.post("/refresh", (req, res) => {
     });
 });
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-
 
 app.listen(process.env.PORT || 5000);
