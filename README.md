@@ -31,7 +31,7 @@ Please log in with your Spotify account.<br>
 #### <u>Local development</u>:hammer_and_wrench::gear:
 
 1. Setup your developer accounts for `Spotify` and `Genius`
-2. Prepare your .env file with the following values
+2. Prepare your `.env` file with the following values
 ```
 REDIRECT_URI=http://localhost:5000
 SPOTIFY_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
